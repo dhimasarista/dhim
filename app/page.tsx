@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+// import { Badge } from "@/components/ui/badge"; // Uncomment jika Badge digunakan kembali
 import { Separator } from "@/components/ui/separator";
 import { CityAnimation } from "@/components/city-animation";
 import {
@@ -15,7 +15,7 @@ import {
   FaEnvelope,
 } from "react-icons/fa";
 import { IoNewspaperOutline } from "react-icons/io5";
-import { GiServerRack } from "react-icons/gi";
+// import { GiServerRack } from "react-icons/gi"; // Uncomment jika GiServerRack digunakan kembali
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -68,18 +68,29 @@ export default function Home() {
 
         {/* Content */}
         <div className="max-w-6xl w-full mx-auto space-y-8 relative z-10">
-          {/* Name and Title */}
-          <div className="space-y-4">
-            <h1 className="text-4xl md:text-6xl font-black tracking-tight no-glow bg-gradient-to-r from-black to-[#f5f5f5] dark:from-white dark:to-gray-600 bg-clip-text text-transparent">
-              Dhimas Arista
-            </h1>
-            <p className="text-lg md:text-xl text-muted-foreground tracking-wide">
-              C# RUST | PROGRAMMER
-            </p>
+          
+          {/* Avatar, Name and Title (Sejajar/Flex) */}
+          <div className="flex flex-col md:flex-row md:items-center gap-6">
+            {/* Ganti src dengan path fotomu nanti, misal: "/images/profile.jpg" */}
+            <img 
+              src="https://cdna.artstation.com/p/assets/images/images/065/169/546/large/izabela-masic-kyoshi.jpg?1689696252" 
+              alt="Dhimas Arista Avatar" 
+              className="w-24 h-24 md:w-28 md:h-28 rounded-full object-cover border-2 border-border shadow-sm shrink-0"
+            />
+            
+            {/* Wrapper khusus untuk teks agar tetap atas-bawah */}
+            <div className="space-y-2 text-center md:text-left">
+              <h1 className="text-4xl md:text-6xl font-black tracking-tight no-glow bg-gradient-to-r from-black to-gray-500 dark:from-white dark:to-gray-200 bg-clip-text text-transparent">
+                  DHIMASARISTA
+              </h1>
+              <p className="text-lg md:text-xl text-muted-foreground tracking-wide">
+                C# RUST & REACT | PROGRAMMER
+              </p>
+            </div>
           </div>
 
           {/* Work Status Tags - Rectangular with Blur */}
-          <div className="flex flex-wrap gap-3">
+          {/* <div className="flex flex-wrap gap-3">
             <Badge
               variant="outline"
               className="px-4 py-2 text-sm rounded-none backdrop-blur-md bg-background/50"
@@ -106,7 +117,7 @@ export default function Home() {
                 TEAM @ MSONE
               </a>
             </Badge>
-          </div>
+          </div> */}
 
           <Separator className="my-8" />
 
@@ -118,13 +129,13 @@ export default function Home() {
               </span>{" "}
               Stay constraint-aware, Think Analytically.
             </p>
-
             */}
 
             <blockquote className="border-l-2 border-border pl-6 text-muted-foreground">
               ⛩️ Science without morality is lame, and morality without science is
-              blind. <span className="text-bold"> — B.J. Habibie</span>
+              blind. <span className="font-bold"> — B.J. Habibie</span>
             </blockquote>
+            
             <div className="mt-4 flex flex-wrap gap-2">
               <img
                 src="https://custom-icon-badges.demolab.com/badge/CSharp-EC4899?logo=cshrp&logoColor=white&style=flat-square"
@@ -219,11 +230,11 @@ export default function Home() {
             <div className="h-8 w-px bg-border mx-2" />
 
             {/* Buttons */}
-            <Button asChild size="lg" className="gap-2">
+            {/* <Button asChild size="lg" className="gap-2">
               <Link href="/works">
                 <GiServerRack className="w-4 h-4" />
               </Link>
-            </Button>
+            </Button> */}
             <Button asChild size="lg" className="gap-2">
               <Link href="/blog">
                 <IoNewspaperOutline className="w-4 h-4" />
