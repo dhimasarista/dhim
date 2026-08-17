@@ -1,0 +1,276 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Remove glow from title */
+h1.no-glow {
+  animation: none;
+  text-shadow: none;
+}
+
+/* Cyberpunk City Animation Styles */
+.city-animation-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Animated Background */
+.animated-bg {
+  position: absolute;
+  inset: 0;
+  transition: background 0.5s ease;
+}
+
+.light .animated-bg {
+  background: #ffffff;
+}
+
+.dark .animated-bg {
+  background: #0a0a0a;
+}
+
+/* Clickable Celestial Button - SAME POSITION for both sun and moon */
+.celestial-button {
+  position: absolute;
+  top: 8%;
+  right: 12%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  pointer-events: all;
+  padding: 0;
+  transition: transform 0.3s ease;
+  z-index: 10;
+  width: 90px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.celestial-button:hover {
+  transform: scale(1.1);
+}
+
+/* Sun */
+.sun {
+  width: 90px;
+  height: 90px;
+  background: radial-gradient(circle, #FFD700 0%, #FFA500 70%, #FF8C00 100%);
+  border-radius: 50%;
+  box-shadow: 0 0 80px rgba(255, 215, 0, 0.8), 0 0 120px rgba(255, 165, 0, 0.4);
+  animation: sun-pulse 4s ease-in-out infinite;
+  position: relative;
+}
+
+.sun::before {
+  content: '';
+  position: absolute;
+  inset: -20px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, transparent 70%);
+}
+
+@keyframes sun-pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 80px rgba(255, 215, 0, 0.8), 0 0 120px rgba(255, 165, 0, 0.4); }
+  50% { transform: scale(1.05); box-shadow: 0 0 100px rgba(255, 215, 0, 1), 0 0 150px rgba(255, 165, 0, 0.6); }
+}
+
+/* Moon - SAME SIZE AND POSITION as sun */
+.moon {
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(circle at 35% 35%, #FFF 0%, #E8E8E8 50%, #D0D0D0 100%);
+  border-radius: 50%;
+  box-shadow: 0 0 50px rgba(255, 255, 255, 0.4), inset -10px -10px 20px rgba(0, 0, 0, 0.1);
+  animation: moon-glow 3s ease-in-out infinite;
+  position: relative;
+  margin: 5px;
+}
+
+.moon::after {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: rgba(200, 200, 200, 0.5);
+  border-radius: 50%;
+  top: 25%;
+  left: 30%;
+  box-shadow: 20px 15px 0 -2px rgba(200, 200, 200, 0.3), -5px 25px 0 -5px rgba(200, 200, 200, 0.4);
+}
+
+@keyframes moon-glow {
+  0%, 100% { box-shadow: 0 0 50px rgba(255, 255, 255, 0.4), inset -10px -10px 20px rgba(0, 0, 0, 0.1); }
+  50% { box-shadow: 0 0 70px rgba(255, 255, 255, 0.6), inset -10px -10px 20px rgba(0, 0, 0, 0.1); }
+}
+
+/* Stars */
+.stars-small {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  top: -100%;
+  left: -100%;
+  background-image:
+    radial-gradient(2px 2px at 20% 30%, white, transparent),
+    radial-gradient(2px 2px at 60% 70%, white, transparent),
+    radial-gradient(1px 1px at 50% 50%, white, transparent),
+    radial-gradient(1px 1px at 80% 10%, white, transparent),
+    radial-gradient(2px 2px at 90% 60%, white, transparent),
+    radial-gradient(1px 1px at 33% 50%, white, transparent),
+    radial-gradient(2px 2px at 79% 53%, white, transparent),
+    radial-gradient(1px 1px at 70% 20%, white, transparent),
+    radial-gradient(2px 2px at 15% 80%, white, transparent),
+    radial-gradient(1px 1px at 45% 25%, white, transparent);
+  background-size: 200% 200%;
+  animation: twinkle-stars 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes twinkle-stars {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ===== LIGHT MODE: Cyberpunk Boxes & Code ===== */
+
+/* Cyberpunk Boxes */
+.cyber-boxes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.cyber-box {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  animation: box-pulse 3s ease-in-out infinite;
+}
+
+@keyframes box-pulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.05);
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.4);
+  }
+}
+
+/* Code Snippets */
+.code-snippets {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  font-family: 'Courier New', monospace;
+  font-weight: 600;
+}
+
+.code-text {
+  position: absolute;
+  font-size: 14px;
+  animation: code-fade 4s ease-in-out infinite;
+}
+
+.light .code-text {
+  color: rgba(0, 0, 0, 0.2);
+}
+
+.dark .code-text {
+  color: rgba(255, 255, 255, 0.8);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+@keyframes code-fade {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+/* ===== DARK MODE: Stars ===== */
+
+/* Star Field */
+.star-field {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  animation: star-twinkle 3s ease-in-out infinite;
+}
+
+@keyframes star-twinkle {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}

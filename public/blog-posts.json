@@ -1,0 +1,153 @@
+[
+  {
+    "id": 1,
+    "slug": "csharp-aspnet-core-for-scalable-backend-services",
+    "title": "C# and ASP.NET Core for Scalable Backend Services",
+    "excerpt": "A deep dive into architectural patterns and best practices for building high-performance backend services using C# and .NET. Covering CQRS, Event Sourcing, and microservices.",
+    "date": "2026-05-01",
+    "readTime": "12 min",
+    "views": 2341,
+    "tags": ["C#", ".NET", "Backend"],
+    "content": [
+      "Scaling backend services starts with deciding where complexity is allowed to live. In C# and .NET, that usually means keeping transport, business rules, and persistence clearly separated so each layer can evolve without forcing a rewrite of the others.",
+      "One reliable approach is to combine clean boundaries with task-specific handlers. CQRS is useful here because read models and write models rarely have the same performance profile. Once those concerns are isolated, it becomes easier to optimize query paths, validation, and event-driven workflows independently.",
+      "The key tradeoff is that architectural patterns should follow load, team size, and product maturity. If the system is still small, simple modular services often outperform an ambitious microservices setup. Good scaling usually looks less like adding services and more like removing unnecessary coupling."
+    ]
+  },
+  {
+    "id": 2,
+    "slug": "why-i-chose-rust-over-other-systems-programming-languages",
+    "title": "Why I Chose Rust Over Other Systems Programming Languages",
+    "excerpt": "After years of working with various systems programming languages, I found Rust to offer the best balance between safety, performance, and modern tooling. Here's my journey and why Rust might be right for you too.",
+    "date": "2026-05-01",
+    "readTime": "8 min",
+    "views": 1247,
+    "tags": ["Rust", "Systems", "Programming"],
+    "content": [
+      "What kept me in Rust was not only the performance but the confidence it creates during maintenance. The compiler pushes design decisions earlier, and that changes how you reason about data ownership, concurrency, and failure handling.",
+      "Compared with older systems languages, Rust makes correctness a visible part of the workflow. You still need judgment and good abstractions, but the language offers strong defaults around memory safety and thread safety without requiring a garbage collector.",
+      "That said, Rust is most rewarding when the project actually benefits from those guarantees. For quick prototypes or highly dynamic workloads, the extra ceremony may not pay off. The best language choice is still the one that aligns with the product and the team."
+    ]
+  },
+  {
+    "id": 3,
+    "slug": "postgresql-performance-tuning-a-practical-guide",
+    "title": "PostgreSQL Performance Tuning: A Practical Guide",
+    "excerpt": "Optimizing PostgreSQL for production workloads. From query analysis to index strategies, connection pooling, and monitoring.",
+    "date": "2024-11-15",
+    "readTime": "15 min",
+    "views": 3892,
+    "tags": ["PostgreSQL", "Database", "Performance"],
+    "content": [
+      "Performance tuning in PostgreSQL usually begins with visibility, not configuration. Before touching memory settings or index design, you need to know which queries dominate latency, which tables grow the fastest, and where locks are accumulating.",
+      "Indexes help only when they match access patterns. A large number of generic indexes can slow writes and bloat storage without meaningfully improving query time. Practical tuning means measuring real predicates, sorting paths, and join behavior before choosing composite or partial indexes.",
+      "Connection pooling and workload shaping matter just as much as database internals. Many production issues come from too many concurrent sessions competing for the same resources. Stable throughput often comes from controlling pressure, not only from making each query faster."
+    ]
+  },
+  {
+    "id": 4,
+    "slug": "container-orchestration-with-podman-beyond-docker",
+    "title": "Container Orchestration with Podman: Beyond Docker",
+    "excerpt": "Exploring Podman as a rootless, daemonless alternative to Docker. Learn how to build, run, and orchestrate containers without the Docker daemon.",
+    "date": "2024-10-30",
+    "readTime": "10 min",
+    "views": 1856,
+    "tags": ["Podman", "Containers", "DevOps"],
+    "content": [
+      "Podman changes the container story by removing the always-on daemon and embracing rootless workflows. That affects security posture, operational simplicity, and how teams reason about privileges in development and deployment.",
+      "In practice, the best part is that many Docker-style commands still feel familiar. The learning curve stays manageable while you gain systemd integration and a cleaner process model. This is especially useful in Linux-heavy environments where service supervision matters.",
+      "Migration should still be intentional. Teams need to confirm compatibility with CI pipelines, image registries, and orchestration expectations. The goal is not switching tools for novelty, but choosing a runtime that better matches the environment you actually operate."
+    ]
+  },
+  {
+    "id": 5,
+    "slug": "the-art-of-writing-clean-code",
+    "title": "The Art of Writing Clean Code",
+    "excerpt": "Code is read more often than it's written. Learn principles and patterns that make your code more maintainable, readable, and elegant.",
+    "date": "2024-10-18",
+    "readTime": "7 min",
+    "views": 4521,
+    "tags": ["Clean Code", "Best Practices"],
+    "content": [
+      "Clean code is less about personal style and more about lowering the cost of change. Names should clarify intent, modules should expose narrow responsibilities, and control flow should be easy to follow without mentally simulating every branch.",
+      "Readability improves when each abstraction earns its existence. Too little structure creates repetition, but too much creates indirection that hides the real behavior. The right balance is the one that lets future edits happen without fear.",
+      "Review culture also matters. Teams that discuss naming, boundaries, and tradeoffs consistently produce codebases that stay healthy longer. Clean code is not a one-time cleanup; it is a maintenance habit."
+    ]
+  },
+  {
+    "id": 6,
+    "slug": "redis-more-than-just-a-cache",
+    "title": "Redis: More Than Just a Cache",
+    "excerpt": "Unlock the full potential of Redis. From pub/sub messaging to streams, sorted sets for leaderboards, and distributed locks.",
+    "date": "2024-09-25",
+    "readTime": "11 min",
+    "views": 2103,
+    "tags": ["Redis", "Database", "Caching"],
+    "content": [
+      "Redis is often introduced as a cache, but that framing undersells the range of patterns it supports. Data structures like streams, sorted sets, and hashes allow it to act as a coordination layer for real-time systems as well.",
+      "The danger is using Redis everywhere because it feels fast. Features such as distributed locks or ephemeral messaging need careful semantics, especially around failure, retries, and visibility. Speed does not replace correctness.",
+      "Used well, Redis becomes a force multiplier for application responsiveness. Used casually, it can become a silent source of complexity. The difference lies in understanding the workload and choosing the simplest fitting pattern."
+    ]
+  },
+  {
+    "id": 7,
+    "slug": "react-native-over-or-even-others",
+    "title": "React Native over or even others.",
+    "excerpt": "Building cross-platform mobile applications with React Native. A practical guide to architecture, performance optimization, and best practices for maintaining a single codebase across iOS and Android. ",
+    "date": "2026-04-12",
+    "readTime": "9 min",
+    "views": 1678,
+    "tags": ["Mobile App", "Design", "Architecture"],
+    "content": [
+      "React Native offers a compelling way to build mobile apps with a shared codebase, but it requires careful architectural choices to avoid pitfalls. The key is to treat the shared code as a platform-agnostic layer while isolating platform-specific concerns in well-defined modules.",
+      "Performance optimization often comes down to understanding the bridge between JavaScript and native code. Minimizing unnecessary re-renders, using native modules for heavy lifting, and profiling with tools like Flipper can help maintain a smooth user experience.",
+      "Maintaining a single codebase also means embracing good testing practices. Unit tests for business logic, integration tests for component interactions, and end-to-end tests for user flows can help catch issues early and ensure that changes do not break functionality across platforms.",
+      "Ultimately, the choice to use React Native should be driven by the specific needs of the project and the team's expertise. When used thoughtfully, it can accelerate development and provide a consistent user experience across devices."
+    ]
+  },
+  {
+    "id": 8,
+    "slug": "api-versioning-without-breaking-clients",
+    "title": "API Versioning Without Breaking Clients",
+    "excerpt": "Practical patterns for evolving public APIs while preserving compatibility and avoiding versioning chaos.",
+    "date": "2025-02-03",
+    "readTime": "13 min",
+    "views": 1984,
+    "tags": ["API", "Architecture", "Backend"],
+    "content": [
+      "API versioning becomes painful when it is treated as a release ritual instead of a compatibility strategy. The best systems preserve stable contracts, deprecate intentionally, and communicate changes long before removal becomes necessary.",
+      "Sometimes the right move is to avoid a new version entirely. Additive changes, tolerant readers, and careful defaults can keep clients working for much longer than teams expect. Breaking changes should be rare and justified.",
+      "A mature versioning policy is part technical and part organizational. It depends on documentation, telemetry, and a clear understanding of who consumes the API and how fast they can adapt."
+    ]
+  },
+  {
+    "id": 9,
+    "slug": "event-driven-workflows-that-stay-debugeable",
+    "title": "Event-Driven Workflows That Stay Debugeable",
+    "excerpt": "Using queues and events without losing the ability to reason about causality, retries, and failure paths.",
+    "date": "2025-02-19",
+    "readTime": "10 min",
+    "views": 1432,
+    "tags": ["Events", "Architecture", "Distributed Systems"],
+    "content": [
+      "Event-driven systems help with decoupling, but they also spread behavior across time and services. That makes debugging harder unless events are designed with traceability, idempotency, and clear ownership in mind.",
+      "A good event contains enough context to explain why it exists without forcing consumers to perform multiple lookups. Correlation identifiers, timestamps, and stable schema choices make incident response dramatically easier.",
+      "The operational goal is simple: a teammate should be able to answer what happened, why it happened, and what happens next. If the system cannot support those questions, the event model still needs work."
+    ]
+  },
+  {
+    "id": 10,
+    "slug": "practical-boundaries-for-modular-monoliths",
+    "title": "Practical Boundaries for Modular Monoliths",
+    "excerpt": "Why modular monoliths remain a strong default, and how to define boundaries that scale with product complexity.",
+    "date": "2025-03-07",
+    "readTime": "14 min",
+    "views": 1765,
+    "tags": ["Architecture", "Monolith", "Software Design"],
+    "content": [
+      "A modular monolith gives teams a valuable middle ground between a tightly coupled codebase and a distributed system. You keep deployment simple while still designing explicit boundaries around domains and dependencies.",
+      "The important part is enforcing those boundaries socially and technically. Shared utilities should remain small, module interfaces should be deliberate, and cross-domain access should happen through clear contracts instead of internal shortcuts.",
+      "Many systems can stay in this shape far longer than expected. When scaling pressure finally appears, a well-structured monolith provides far better extraction paths than a rushed microservices architecture."
+    ]
+  }
+]
