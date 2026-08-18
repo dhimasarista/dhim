@@ -73,7 +73,7 @@ export default function Home() {
           <div className="flex flex-col md:flex-row md:items-center gap-6">
             {/* Ganti src dengan path fotomu nanti, misal: "/images/profile.jpg" */}
             <img 
-              src="https://cdna.artstation.com/p/assets/images/images/065/169/546/large/izabela-masic-kyoshi.jpg?1689696252" 
+              src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/730d7fd6-7732-47f1-8bb2-c22fbeae272e/deombqn-102afb4a-3683-4dc6-a0ab-9eb7d00e64ed.jpg/v1/fill/w_1063,h_752,q_70,strp/earthbender_avatars_by_moptop4000_deombqn-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9OTA2IiwicGF0aCI6Ii9mLzczMGQ3ZmQ2LTc3MzItNDdmMS04YmIyLWMyMmZiZWFlMjcyZS9kZW9tYnFuLTEwMmFmYjRhLTM2ODMtNGRjNi1hMGFiLTllYjdkMDBlNjRlZC5qcGciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.-Lf8GEm28YZqSWTfWAvTLDl0Tg2UfBMGkJXrs8-1dp8" 
               alt="Dhimas Arista Avatar" 
               className="w-24 h-24 md:w-28 md:h-28 rounded-full object-cover border-2 border-border shadow-sm shrink-0"
             />
@@ -132,8 +132,7 @@ export default function Home() {
             */}
 
             <blockquote className="border-l-2 border-border pl-6 text-muted-foreground">
-              ⛩️ Science without morality is lame, and morality without science is
-              blind. <span className="font-bold"> — B.J. Habibie</span>
+              ⛩️ Tooi michi no rimo ippo kara hajimaru / <span className="font-bold">A long journey begins with a single step.</span>
             </blockquote>
             
             <div className="mt-4 flex flex-wrap gap-2">
