@@ -67,8 +67,7 @@ export default function Home() {
         {/* <CityAnimation /> */}
         {/* Background GIF */}
         <img 
-          src="https://private-user-images.githubusercontent.com/74050710/641481277-1dccd483-7a5e-4dde-b90a-a2e634da9b04.gif?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3ODgzNDA0NDgsIm5iZiI6MTc4ODM0MDE0OCwicGF0aCI6Ii83NDA1MDcxMC82NDE0ODEyNzctMWRjY2Q0ODMtN2E1ZS00ZGRlLWI5MGEtYTJlNjM0ZGE5YjA0LmdpZj9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNjA5MDIlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjYwOTAyVDA5MDkwOFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWY1N2FhN2RjMDMzZmMyMjBjYTljNWIwMGE2ZmU1MDM3N2VlNTJlOTM3MWVkZTY4NGZhN2ZmODRiNWQyY2ZlM2YmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JnJlc3BvbnNlLWNvbnRlbnQtdHlwZT1pbWFnZSUyRmdpZiJ9.TwMURJV2l1icbS-Oeoq466vlqwm2Zfuqlc_Wggl9pwo" /* Ganti dengan lokasi file GIF Anda di folder public */
-          alt="Animated City Background"
+          src="https://private-user-images.githubusercontent.com/74050710/641481277-1dccd483-7a5e-4dde-b90a-a2e634da9b04.gif?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3ODgzNDA0NDgsIm5iZiI6MTc4ODM0MDE0OCwicGF0aCI6Ii83NDA1MDcxMC82NDE0ODEyNzctMWRjY2Q0ODMtN2E1ZS00ZGRlLWI5MGEtYTJlNjM0ZGE5YjA0LmdpZj9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNjA5MDIlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjYwOTAyVDA5MDkwOFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWY1N2FhN2RjMDMzZmMyMjBjYTljNWIwMGE2ZmU1MDM3N2VlNTJlOTM3MWVkZTY4NGZhN2ZmODRiNWQyY2ZlM2YmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JnJlc3BvbnNlLWNvbnRlbnQtdHlwZT1pbWFnZSUyRmdpZiJ9.TwMURJV2l1icbS-Oeoq466vlqwm2Zfuqlc_Wggl9pwo"
           className="absolute inset-0 w-full h-full object-cover z-0"
         />
 
