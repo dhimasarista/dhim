@@ -67,7 +67,7 @@ export default function Home() {
         {/* <CityAnimation /> */}
         {/* Background GIF */}
         <img 
-          src="https://private-user-images.githubusercontent.com/74050710/641481277-1dccd483-7a5e-4dde-b90a-a2e634da9b04.gif?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3OTAzOTM0MjQsIm5iZiI6MTc5MDM5MzEyNCwicGF0aCI6Ii83NDA1MDcxMC82NDE0ODEyNzctMWRjY2Q0ODMtN2E1ZS00ZGRlLWI5MGEtYTJlNjM0ZGE5YjA0LmdpZj9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNjA5MjYlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjYwOTI2VDAzMjUyNFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTNhN2M2ZmY0YWY4OTEwZTQ2OTVkMjdlNmZjNWYxYmE1MmRlY2Y1M2ZiYTljMmViMWE5Y2Q2YjFiZWIzNjQwNjMmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JnJlc3BvbnNlLWNvbnRlbnQtdHlwZT1pbWFnZSUyRmdpZiJ9.Od7i4B-X4-uH-fUZYHMCd-j8Um2t73HPUA6eYVK4mK4"
+          src="/assets/641481277-1dccd483-7a5e-4dde-b90a-a2e634da9b04.gif"
           className="absolute inset-0 w-full h-full object-cover z-0"
         />
 
@@ -156,8 +156,8 @@ export default function Home() {
                 alt="React"
               />
               <img
-                src="https://custom-icon-badges.demolab.com/badge/Null-F3F4F6?logo=lucide-coffee&logoColor=white&style=flat-square"
-                alt="Null"
+                src="https://custom-icon-badges.demolab.com/badge/Coffee-F3F4F6?logo=lucide-coffee&logoColor=white&style=flat-square"
+                alt="Coffee"
               />
               <img
                 src="https://img.shields.io/badge/PostgreSQL-316192?logo=postgresql&logoColor=white&style=flat-square"
