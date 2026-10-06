@@ -172,11 +172,10 @@ export default function Home() {
           muted
           loop
           playsInline
-          poster="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/693205bf-8048-456a-879e-4e0a1b85a098.webp"
-          aria-label="Painted alpine panorama: a lone hiker with a pink backpack faces a snow-capped peak above a sea of clouds"
+          aria-label="Top view of Tokyo cargo port"
         >
           <source
-            src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260826_123836_11a3c5e0-713f-4bef-a8e9-7dd93bdea3b0.mp4"
+            src="/assets/mixkit-top-view-of-tokyo-cargo-port-4445-hd-ready.mp4"
             type="video/mp4"
           />
         </video>

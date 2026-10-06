@@ -382,7 +382,7 @@ h1.no-glow {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background: #1d8fb8;
+  background: #0a101d;
   font-family: var(--nx-font-body);
   color: var(--nx-text-primary);
   display: flex;
@@ -393,7 +393,7 @@ h1.no-glow {
   position: absolute;
   inset: 0;
   overflow: hidden;
-  background: #1d8fb8;
+  background: #0a101d;
   z-index: 0;
 }
 
