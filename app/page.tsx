@@ -1,353 +1,410 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
-import { ThemeToggle } from "@/components/theme-toggle";
-import { IIoTArchitectureBackground } from "@/components/iiot-architecture-background";
-import { IIoTTerminalDrawer } from "@/components/iiot-terminal-drawer";
-import { ArchitectureShowcase } from "@/components/architecture-showcase";
-import {
-  FaGithub,
-  FaLinkedin,
-  FaTwitter,
-  FaInstagram,
-  FaWhatsapp,
-  FaEnvelope,
-} from "react-icons/fa";
-import {
-  Terminal,
-  Activity,
-  Layers,
-  Cpu,
-  ArrowRight,
-  FolderGit2,
-  BookOpen,
-  Building2,
-  ExternalLink,
-} from "lucide-react";
 
 export default function Home() {
-  const [mounted, setMounted] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setMounted(true);
+    if (typeof window === "undefined") return;
+    if (document.documentElement.dataset.entered) return;
+
+    // Check prefers-reduced-motion
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      document.documentElement.classList.remove("js-enter");
+      return;
+    }
+
+    document.documentElement.dataset.entered = "true";
+
+    const isSmall = window.matchMedia("(max-width: 648px)").matches;
+    const d = isSmall ? 0.62 : 1;
+    const t = isSmall ? 0.85 : 1;
+
+    const EXPO = "cubic-bezier(.16,1,.3,1)";
+    const SOFT = "cubic-bezier(.22,.65,.28,1)";
+    const SETTLE = "cubic-bezier(.33,1,.68,1)";
+
+    const animations: Animation[] = [];
+
+    const anim = (
+      selector: string,
+      keyframes: Keyframe[],
+      options: KeyframeAnimationOptions
+    ) => {
+      const el = document.querySelector<HTMLElement>(selector);
+      if (!el) return null;
+      const a = el.animate(keyframes, options);
+      animations.push(a);
+      return a;
+    };
+
+    // 1. eyebrow: rise 12px, 560ms, delay 60, SOFT
+    anim(
+      ".nx-eyebrow",
+      [
+        { opacity: 0, transform: `translate3d(0, ${12 * d}px, 0)` },
+        { opacity: 1, transform: "translate3d(0, 0, 0)" },
+      ],
+      { duration: 560, delay: 60 * t, easing: SOFT, fill: "forwards" }
+    );
+
+    // 2. headline: 118% → 0, 950ms, delay 170, EXPO
+    anim(
+      ".nx-headline",
+      [
+        { transform: "translate3d(0, 118%, 0)" },
+        { transform: "translate3d(0, 0, 0)" },
+      ],
+      { duration: 950, delay: 170 * t, easing: EXPO, fill: "forwards" }
+    );
+
+    // 3. lede: rise 14px, 660ms, delay 430, SOFT
+    anim(
+      ".nx-lede",
+      [
+        { opacity: 0, transform: `translate3d(0, ${14 * d}px, 0)` },
+        { opacity: 1, transform: "translate3d(0, 0, 0)" },
+      ],
+      { duration: 660, delay: 430 * t, easing: SOFT, fill: "forwards" }
+    );
+
+    // 4. cta: opacity 0 + Y12 + scale(.985) → none, 580ms, delay 620, SETTLE
+    anim(
+      ".nx-cta",
+      [
+        { opacity: 0, transform: `translate3d(0, ${12 * d}px, 0) scale(0.985)` },
+        { opacity: 1, transform: "translate3d(0, 0, 0) scale(1)" },
+      ],
+      { duration: 580, delay: 620 * t, easing: SETTLE, fill: "forwards" }
+    );
+
+    // 5. mark + wordmark: rise 10px, 540ms, delay 600, SOFT
+    anim(
+      ".nx-mark",
+      [
+        { opacity: 0, transform: `translate3d(0, ${10 * d}px, 0)` },
+        { opacity: 1, transform: "translate3d(0, 0, 0)" },
+      ],
+      { duration: 540, delay: 600 * t, easing: SOFT, fill: "forwards" }
+    );
+
+    anim(
+      ".nx-wordmark",
+      [
+        { opacity: 0, transform: `translate3d(0, ${10 * d}px, 0)` },
+        { opacity: 1, transform: "translate3d(0, 0, 0)" },
+      ],
+      { duration: 540, delay: 600 * t, easing: SOFT, fill: "forwards" }
+    );
+
+    // 6. tagline: rise 10px, 540ms, delay 670, SOFT
+    anim(
+      ".nx-tagline",
+      [
+        { opacity: 0, transform: `translate3d(0, ${10 * d}px, 0)` },
+        { opacity: 1, transform: "translate3d(0, 0, 0)" },
+      ],
+      { duration: 540, delay: 670 * t, easing: SOFT, fill: "forwards" }
+    );
+
+    // 7. each .col: rise 14px, 580ms, delay 720 + i*70, SOFT
+    const cols = document.querySelectorAll<HTMLElement>(".nx-col");
+    cols.forEach((col, i) => {
+      const a = col.animate(
+        [
+          { opacity: 0, transform: `translate3d(0, ${14 * d}px, 0)` },
+          { opacity: 1, transform: "translate3d(0, 0, 0)" },
+        ],
+        { duration: 580, delay: (720 + i * 70) * t, easing: SOFT, fill: "forwards" }
+      );
+      animations.push(a);
+    });
+
+    // 8. .rule: scaleX 0→1, 720ms, delay 980, EXPO
+    anim(
+      ".nx-rule",
+      [{ transform: "scaleX(0)" }, { transform: "scaleX(1)" }],
+      { duration: 720, delay: 980 * t, easing: EXPO, fill: "forwards" }
+    );
+
+    // 9. legal: rise 8px, 500ms, delay 1120, SOFT
+    anim(
+      ".nx-legal",
+      [
+        { opacity: 0, transform: `translate3d(0, ${8 * d}px, 0)` },
+        { opacity: 1, transform: "translate3d(0, 0, 0)" },
+      ],
+      { duration: 500, delay: 1120 * t, easing: SOFT, fill: "forwards" }
+    );
+
+    // 10. each .socials a: rise 8px, 500ms, delay 1170 + i*60, SOFT
+    const socials = document.querySelectorAll<HTMLElement>(".nx-socials a");
+    socials.forEach((item, i) => {
+      const a = item.animate(
+        [
+          { opacity: 0, transform: `translate3d(0, ${8 * d}px, 0)` },
+          { opacity: 1, transform: "translate3d(0, 0, 0)" },
+        ],
+        { duration: 500, delay: (1170 + i * 60) * t, easing: SOFT, fill: "forwards" }
+      );
+      animations.push(a);
+    });
+
+    // Cleanup and remove js-enter on complete
+    Promise.all(animations.map((a) => a.finished))
+      .then(() => {
+        document.documentElement.classList.remove("js-enter");
+        animations.forEach((a) => a.cancel());
+      })
+      .catch(() => {
+        document.documentElement.classList.remove("js-enter");
+      });
   }, []);
 
-  const socialLinks = [
-    {
-      icon: <FaGithub className="w-4 h-4" />,
-      url: "https://github.com/dhimasarista",
-      label: "GitHub",
-    },
-    {
-      icon: <FaLinkedin className="w-4 h-4" />,
-      url: "https://linkedin.com/in/dhimasarista",
-      label: "LinkedIn",
-    },
-    {
-      icon: <FaTwitter className="w-4 h-4" />,
-      url: "https://twitter.com/dhimasarista22",
-      label: "Twitter",
-    },
-    {
-      icon: <FaInstagram className="w-4 h-4" />,
-      url: "https://instagram.com/dhimasarista",
-      label: "Instagram",
-    },
-    {
-      icon: <FaWhatsapp className="w-4 h-4" />,
-      url: "https://wa.me/6285157248841",
-      label: "WhatsApp",
-    },
-    {
-      icon: <FaEnvelope className="w-4 h-4" />,
-      url: "mailto:mdhimasarista@gmail.com",
-      label: "Email",
-    },
-  ];
-
-  if (!mounted) return null;
-
   return (
-    <div className="min-h-screen bg-background text-foreground relative selection:bg-emerald-500/20 selection:text-emerald-500">
-      {/* --- TOP INDUSTRIAL HUD BAR --- */}
-      <header className="sticky top-0 z-30 border-b border-border/80 bg-background/85 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 h-14 flex items-center justify-between font-mono-code text-xs">
-          <div className="flex items-center gap-3">
-            <span className="flex items-center gap-1.5 font-bold tracking-wider text-foreground">
-              <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-              DHIMAS_NODE // BATAM
-            </span>
-            <span className="text-muted-foreground hidden sm:inline">|</span>
-            <span className="text-muted-foreground hidden sm:inline text-[11px]">
-              PROTOCOL: ZMQ/WSS
-            </span>
-          </div>
+    <main ref={containerRef} className="nx-viewport">
+      {/* Background Video */}
+      <div className="nx-bg">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/693205bf-8048-456a-879e-4e0a1b85a098.webp"
+          aria-label="Painted alpine panorama: a lone hiker with a pink backpack faces a snow-capped peak above a sea of clouds"
+        >
+          <source
+            src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260826_123836_11a3c5e0-713f-4bef-a8e9-7dd93bdea3b0.mp4"
+            type="video/mp4"
+          />
+        </video>
+      </div>
 
-          <div className="flex items-center gap-4">
-            <nav className="flex items-center gap-2">
-              <Link
-                href="/works"
-                className="px-2.5 py-1 text-muted-foreground hover:text-foreground hover:bg-muted/60 rounded transition-colors"
-              >
-                WORKS
-              </Link>
-              <Link
-                href="/blog"
-                className="px-2.5 py-1 text-muted-foreground hover:text-foreground hover:bg-muted/60 rounded transition-colors"
-              >
-                LOGS
-              </Link>
-            </nav>
-            <Separator orientation="vertical" className="h-4" />
-            <ThemeToggle />
-          </div>
+      {/* Aspect-Ratio Driven Scrim */}
+      <div className="nx-scrim" />
+
+      {/* Left-Aligned Hero Stage */}
+      <div className="nx-stage">
+        <p className="nx-eyebrow nx-abs">A long journey begins with a single step</p>
+
+        <div className="nx-headline-mask nx-abs">
+          <h1 className="nx-headline">Dhimas Arista</h1>
         </div>
-      </header>
 
-      {/* --- HERO SECTION WITH INTERACTIVE IIoT SYSTEM FLOW BACKGROUND --- */}
-      <section className="relative min-h-[92vh] flex items-center justify-center px-6 md:px-12 lg:px-20 py-16 overflow-hidden">
-        {/* Animated Architecture & Packet Flow Background */}
-        <IIoTArchitectureBackground />
+        <p className="nx-lede nx-abs">
+          Software &amp; Industrial IoT Engineer specializing in distributed
+          architecture, real-time telemetry systems, and resilient fullstack software.
+        </p>
 
-        {/* Foreground Content Card with Technical HUD styling */}
-        <div className="max-w-5xl w-full mx-auto relative z-10 space-y-8">
-          
-          {/* Main Profile Info Box */}
-          <div className="p-6 md:p-10 rounded-2xl border border-border/80 bg-background/70 dark:bg-slate-950/75 backdrop-blur-xl shadow-2xl corner-hud space-y-8">
-            
-            {/* Top Status Bar */}
-            <div className="flex flex-wrap items-center justify-between gap-3 font-mono-code text-xs border-b border-border/60 pb-4 text-muted-foreground">
-              <div className="flex items-center gap-2">
-                <span className="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 font-bold">
-                  SYS_ONLINE
-                </span>
-                <span>CLUSTER: BATAM_01</span>
-                <span className="hidden sm:inline">•</span>
-                <span className="hidden sm:inline">EDGE TELEMETRY INGESTION ACTIVE</span>
-              </div>
-              <div className="text-[11px] font-mono-code">
-                PORT: <span className="text-foreground">tcp://*:5555</span>
-              </div>
-            </div>
+        {/* CTA: Social Media Icons Group */}
+        <div className="nx-cta nx-abs" aria-label="Social Profiles">
+          <a
+            href="https://github.com/dhimasarista"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="nx-cta-social"
+            aria-label="GitHub"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+              />
+            </svg>
+          </a>
 
-            {/* Avatar, Identity and Title */}
-            <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
-              {/* Avatar with cyber/industrial border */}
-              <div className="relative group shrink-0">
-                <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500 opacity-60 blur group-hover:opacity-100 transition duration-500" />
-                <img
-                  src="https://avatars.githubusercontent.com/u/74050710?v=4"
-                  alt="Dhimas Arista Avatar"
-                  className="relative w-24 h-24 md:w-28 md:h-28 rounded-full object-cover border-2 border-background shadow-xl"
-                />
-                <span className="absolute bottom-1 right-1 h-4 w-4 rounded-full bg-emerald-500 border-2 border-background shadow-sm animate-pulse" />
-              </div>
+          <a
+            href="https://linkedin.com/in/dhimasarista"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="nx-cta-social"
+            aria-label="LinkedIn"
+          >
+            <svg viewBox="0 0 30 30" aria-hidden="true">
+              <path d="M24 3H6C4.343 3 3 4.343 3 6v18c0 1.657 1.343 3 3 3h18c1.657 0 3-1.343 3-3V6c0-1.657-1.343-3-3-3zM10.15 22.8H6.84V12.14h3.31V22.8zM8.5 10.68c-1.06 0-1.92-.86-1.92-1.92s.86-1.92 1.92-1.92 1.92.86 1.92 1.92-.86 1.92-1.92 1.92zm14.65 12.12h-3.31v-5.18c0-1.24-.02-2.83-1.72-2.83-1.73 0-1.99 1.35-1.99 2.74v5.27h-3.31V12.14h3.18v1.46h.04c.44-.84 1.53-1.72 3.14-1.72 3.36 0 3.98 2.21 3.98 5.09v5.83z" />
+            </svg>
+          </a>
 
-              {/* Text info */}
-              <div className="space-y-2 text-center md:text-left flex-1">
-                <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded bg-muted/60 text-muted-foreground text-xs font-mono-code">
-                  <Cpu className="w-3.5 h-3.5 text-cyan-500" />
-                  <span>C# .NET • REACT • DISTRIBUTED SYSTEMS</span>
-                </div>
+          <a
+            href="https://twitter.com/dhimasarista22"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="nx-cta-social"
+            aria-label="Twitter"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+          </a>
 
-                <h1 className="text-4xl md:text-6xl font-black tracking-tight bg-gradient-to-r from-foreground via-foreground/90 to-muted-foreground bg-clip-text text-transparent">
-                  DHIMAS ARISTA
-                </h1>
+          <a
+            href="https://wa.me/6285157248841"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="nx-cta-social"
+            aria-label="WhatsApp"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M17.472 14.382c-.301-.15-1.78-.878-2.056-.979-.275-.1-.476-.15-.676.15-.201.3-.777.979-.953 1.18-.175.2-.351.225-.652.075-.301-.15-1.27-.468-2.42-1.493-.895-.798-1.5-1.784-1.676-2.085-.175-.301-.019-.464.132-.614.136-.135.301-.351.452-.527.15-.175.201-.3.301-.501.1-.2.05-.376-.025-.526-.075-.15-.677-1.631-.928-2.233-.245-.587-.494-.507-.677-.517l-.577-.01c-.201 0-.526.075-.802.376-.276.301-1.053 1.028-1.053 2.508 0 1.48 1.078 2.909 1.229 3.109.15.2 2.122 3.24 5.141 4.543.718.31 1.279.495 1.716.634.721.23 1.378.197 1.897.12.578-.087 1.78-.727 2.031-1.429.25-.702.25-1.304.175-1.429-.075-.125-.276-.2-.577-.35zM12.04 2C6.51 2 2.02 6.488 2.02 12.016c0 1.956.564 3.784 1.542 5.334L2 22.19l4.98-1.523c1.5 1.002 3.298 1.583 5.06 1.583 5.53 0 10.02-4.488 10.02-10.016C22.06 6.488 17.57 2 12.04 2z" />
+            </svg>
+          </a>
 
-                <p className="text-lg md:text-xl font-medium text-emerald-600 dark:text-emerald-400 font-mono-code tracking-wide">
-                  SOFTWARE & INDUSTRIAL IoT ENGINEER
-                </p>
-
-                <p className="text-sm text-muted-foreground max-w-2xl pt-1">
-                  Crafting high-throughput industrial telemetry pipelines, deterministic C# backend engines, and real-time operator interfaces in Batam, Riau Islands.
-                </p>
-              </div>
-            </div>
-
-            {/* Industry Roles & Affiliations */}
-            <div className="flex flex-wrap items-center gap-3 pt-1">
-              <a
-                href="https://epbox-engg.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-border/80 bg-muted/40 hover:bg-muted/80 hover:border-emerald-500/50 text-xs font-mono-code text-foreground transition-all group"
-              >
-                <Building2 className="w-3.5 h-3.5 text-emerald-500" />
-                <span>IT @ EPBOX ENGINEERING PTE LTD</span>
-                <ExternalLink className="w-3 h-3 text-muted-foreground group-hover:text-foreground" />
-              </a>
-
-              <a
-                href="https://msone.id/teams"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-border/80 bg-muted/40 hover:bg-muted/80 hover:border-cyan-500/50 text-xs font-mono-code text-foreground transition-all group"
-              >
-                <Layers className="w-3.5 h-3.5 text-cyan-500" />
-                <span>TEAM @ MSONE</span>
-                <ExternalLink className="w-3 h-3 text-muted-foreground group-hover:text-foreground" />
-              </a>
-            </div>
-
-            {/* Quote Block with Industrial styling */}
-            <div className="border-l-2 border-emerald-500/80 bg-muted/20 pl-4 py-2 text-sm text-muted-foreground font-mono-code">
-              ⛩️ Tooi michi no rimo ippo kara hajimaru /{" "}
-              <span className="font-bold text-foreground">
-                A long journey begins with a single step.
-              </span>
-            </div>
-
-            {/* Technology Badges Matrix */}
-            <div className="space-y-2">
-              <div className="text-[11px] font-mono-code text-muted-foreground uppercase tracking-widest">
-                // SYSTEM_STACK & RUNTIME_BADGES
-              </div>
-              <div className="flex flex-wrap gap-2 items-center">
-                <img
-                  src="https://custom-icon-badges.demolab.com/badge/CSharp-EC4899?logo=cshrp&logoColor=white&style=flat-square"
-                  alt="C#"
-                  className="rounded-sm shadow-sm"
-                />
-                <img
-                  src="https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=black&style=flat-square"
-                  alt="React"
-                  className="rounded-sm shadow-sm"
-                />
-                <img
-                  src="https://custom-icon-badges.demolab.com/badge/Coffee-F3F4F6?logo=lucide-coffee&logoColor=white&style=flat-square"
-                  alt="Coffee"
-                  className="rounded-sm shadow-sm"
-                />
-                <img
-                  src="https://img.shields.io/badge/PostgreSQL-316192?logo=postgresql&logoColor=white&style=flat-square"
-                  alt="PostgreSQL"
-                  className="rounded-sm shadow-sm"
-                />
-                <img
-                  src="https://img.shields.io/badge/DragonflyDB-E03C31?style=flat-square&logo=redis&logoColor=white"
-                  alt="DragonflyDB"
-                  className="rounded-sm shadow-sm"
-                />
-                <img
-                  src="https://custom-icon-badges.demolab.com/badge/ZeroMQ-F3F4F6?logo=zeromq&logoColor=white&style=flat-square"
-                  alt="ZeroMQ"
-                  className="rounded-sm shadow-sm"
-                />
-                <img
-                  src="https://custom-icon-badges.demolab.com/badge/Websocket-262626?logo=websocket&logoColor=white&style=flat-square"
-                  alt="WebSocket"
-                  className="rounded-sm shadow-sm"
-                />
-                <img
-                  src="https://img.shields.io/badge/Podman-892CA0?logo=podman&logoColor=white&style=flat-square"
-                  alt="Podman"
-                  className="rounded-sm shadow-sm"
-                />
-                <img
-                  src="https://img.shields.io/badge/Kubernetes-326CE5?logo=kubernetes&logoColor=white&style=flat-square"
-                  alt="Kubernetes"
-                  className="rounded-sm shadow-sm"
-                />
-                <img
-                  src="https://img.shields.io/badge/Debian-A81D33?logo=debian&logoColor=white&style=flat-square"
-                  alt="Debian"
-                  className="rounded-sm shadow-sm"
-                />
-                <img
-                  src="https://img.shields.io/badge/Grafana-F46800?logo=grafana&logoColor=white&style=flat-square"
-                  alt="Grafana"
-                  className="rounded-sm shadow-sm"
-                />
-                <img
-                  src="https://img.shields.io/badge/Nginx-009639?logo=nginx&logoColor=white&style=flat-square"
-                  alt="Nginx"
-                  className="rounded-sm shadow-sm"
-                />
-                <img
-                  src="https://img.shields.io/badge/Nomad-262626?logo=hashicorp&logoColor=white&style=flat-square"
-                  alt="Nomad"
-                  className="rounded-sm shadow-sm"
-                />
-                <img
-                  src="https://img.shields.io/badge/Jenkins-D24939?style=flat-square&logo=jenkins&logoColor=white"
-                  alt="Jenkins"
-                  className="rounded-sm shadow-sm"
-                />
-              </div>
-            </div>
-
-            <Separator className="bg-border/60" />
-
-            {/* CTAs and Social Links */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
-              {/* Main Action Navigation Buttons */}
-              <div className="flex flex-wrap items-center gap-3">
-                <Button asChild size="lg" className="gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-mono-code shadow-md">
-                  <Link href="/works">
-                    <FolderGit2 className="w-4 h-4" />
-                    <span>EXPLORE WORKS</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
-                </Button>
-                <Button asChild variant="outline" size="lg" className="gap-2 font-mono-code border-border/80">
-                  <Link href="/blog">
-                    <BookOpen className="w-4 h-4 text-emerald-500" />
-                    <span>ENGINEERING LOGS</span>
-                  </Link>
-                </Button>
-              </div>
-
-              {/* Social Channels Links */}
-              <div className="flex items-center gap-2">
-                {socialLinks.map((link, index) => (
-                  <Button
-                    key={index}
-                    variant="outline"
-                    size="icon"
-                    asChild
-                    className="h-10 w-10 border-border/80 hover:border-emerald-500 hover:text-emerald-500 transition-colors"
-                  >
-                    <a
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={link.label}
-                    >
-                      {link.icon}
-                    </a>
-                  </Button>
-                ))}
-              </div>
-            </div>
-          </div>
+          <a
+            href="mailto:mdhimasarista@gmail.com"
+            className="nx-cta-social"
+            aria-label="Email"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+            </svg>
+          </a>
         </div>
-      </section>
+      </div>
 
-      {/* --- INTERACTIVE ARCHITECTURE & DATA FLOW PIPELINE SHOWCASE --- */}
-      <ArchitectureShowcase />
+      {/* Glass Pane Footer */}
+      <footer className="nx-footer">
+        <div className="nx-finner">
+          {/* Brand Row */}
+          <div className="nx-brandrow nx-abs">
+            <svg
+              className="nx-mark"
+              viewBox="0 0 100 100"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path d="M 45.13 1.28 L 54.87 1.28 L 54.87 42.42 L 45.13 38.09 Z" />
+              <path d="M 79.47 12.10 L 87.90 20.53 L 58.80 49.62 L 53.45 38.13 Z" />
+              <path d="M 98.72 45.13 L 98.72 54.87 L 57.58 54.87 L 61.91 45.13 Z" />
+              <path d="M 87.90 79.47 L 79.47 87.90 L 50.38 58.80 L 61.87 53.45 Z" />
+              <path d="M 54.87 98.72 L 45.13 98.72 L 45.13 57.58 L 54.87 61.91 Z" />
+              <path d="M 20.53 87.90 L 12.10 79.47 L 41.20 50.38 L 46.55 61.87 Z" />
+              <path d="M 1.28 54.87 L 1.28 45.13 L 42.42 45.13 L 38.09 54.87 Z" />
+              <path d="M 12.10 20.53 L 20.53 12.10 L 49.62 41.20 L 38.13 46.55 Z" />
+            </svg>
+          </div>
 
-      {/* --- LIVE TELEMETRY LOGS DRAWER WIDGET --- */}
-      <IIoTTerminalDrawer />
+          <span className="nx-wordmark nx-abs">Dhimas Arista</span>
 
-      {/* --- FOOTER --- */}
-      <footer className="border-t border-border/80 py-12 bg-background/80 font-mono-code">
-        <div className="max-w-4xl mx-auto px-6 text-center space-y-3">
-          <p className="text-sm text-foreground font-semibold">
-            &lt; DHIMASARISTA /&gt; © 2045 BATAM, RIAU ISLANDS
+          <p className="nx-tagline nx-abs">
+            Engineering distributed architectures, industrial IoT telemetry, and
+            resilient software systems from Batam, Riau Islands.
           </p>
-          <div className="flex flex-wrap justify-center gap-4 text-xs text-muted-foreground">
-            <span>IIoT & DISTRIBUTED SYSTEMS</span>
-            <span>•</span>
-            <span>C# .NET & REACT</span>
-            <span>•</span>
-            <span>ZEROMQ & MODBUS TCP</span>
+
+          {/* Navigation Columns */}
+          <nav className="nx-nav">
+            {/* Column 1: Experience */}
+            <div className="nx-col nx-c1 nx-abs">
+              <h3>EXPERIENCE</h3>
+              <ul>
+                <li>
+                  <a href="https://epbox-engg.com" target="_blank" rel="noopener noreferrer">
+                    EPBOX Engineering — IIoT Systems
+                  </a>
+                </li>
+                <li>
+                  <a href="https://msone.id" target="_blank" rel="noopener noreferrer">
+                    MSONE — Fullstack Solutions
+                  </a>
+                </li>
+                <li>
+                  <a href="#">Orkaine — Payment Platform Engine</a>
+                </li>
+                <li>
+                  <Link href="/works">Selected Works Archive (/works)</Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Column 2: Capabilities */}
+            <div className="nx-col nx-c2 nx-abs">
+              <h3>CAPABILITIES</h3>
+              <ul>
+                <li>
+                  <a href="#">Skill Programming</a>
+                </li>
+                <li>
+                  <a href="#">Software Architecture</a>
+                </li>
+                <li>
+                  <a href="#">Industrial IoT</a>
+                </li>
+                <li>
+                  <a href="#">Infrastructure &amp; DevOps</a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Column 3: Resources */}
+            <div className="nx-col nx-c3 nx-abs">
+              <h3>RESOURCES</h3>
+              <ul>
+                <li>
+                  <a href="#">Socials</a>
+                </li>
+                <li>
+                  <a href="#">Planology</a>
+                </li>
+                <li>
+                  <a href="#">Robotics</a>
+                </li>
+                <li>
+                  <Link href="/blog">Engineering Logs (/blog)</Link>
+                </li>
+              </ul>
+            </div>
+          </nav>
+
+          {/* Rule Hairline */}
+          <div className="nx-rule nx-abs" />
+
+          {/* Foot Row: Legal & Socials */}
+          <div className="nx-footrow nx-abs">
+            <p className="nx-legal">® 2025 Dhimas Arista all rights reserved.</p>
+
+            <div className="nx-socials">
+              <a
+                href="https://linkedin.com/in/dhimasarista"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+              >
+                <svg viewBox="0 0 30 30" aria-hidden="true">
+                  <path d="M24 3H6C4.343 3 3 4.343 3 6v18c0 1.657 1.343 3 3 3h18c1.657 0 3-1.343 3-3V6c0-1.657-1.343-3-3-3zM10.15 22.8H6.84V12.14h3.31V22.8zM8.5 10.68c-1.06 0-1.92-.86-1.92-1.92s.86-1.92 1.92-1.92 1.92.86 1.92 1.92-.86 1.92-1.92 1.92zm14.65 12.12h-3.31v-5.18c0-1.24-.02-2.83-1.72-2.83-1.73 0-1.99 1.35-1.99 2.74v5.27h-3.31V12.14h3.18v1.46h.04c.44-.84 1.53-1.72 3.14-1.72 3.36 0 3.98 2.21 3.98 5.09v5.83z" />
+                </svg>
+              </a>
+
+              <a
+                href="https://github.com/dhimasarista"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                  />
+                </svg>
+              </a>
+
+              <a
+                href="https://medium.com/@dhimasarista"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Medium"
+              >
+                <svg viewBox="0 0 1043.63 592.71" aria-hidden="true">
+                  <path d="M588.67 296.36c0 163.67-131.78 296.35-294.33 296.35S0 460.03 0 296.36 131.78 0 294.34 0s294.33 132.69 294.33 296.36M911.56 296.36c0 154.06-65.89 279-147.17 279s-147.17-124.94-147.17-279 65.88-279 147.16-279 147.17 124.9 147.17 279M1043.63 296.36c0 138-23.17 249.94-51.76 249.94s-51.75-111.91-51.75-249.94 23.17-249.94 51.75-249.94 51.76 111.9 51.76 249.94" />
+                </svg>
+              </a>
+            </div>
           </div>
         </div>
       </footer>
-    </div>
+    </main>
   );
 }
