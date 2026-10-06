@@ -17,7 +17,7 @@ import {
   FaEye,
 } from "react-icons/fa";
 import { formatBlogDate, getAllBlogPosts } from "@/lib/blog";
-import { House } from "lucide-react";
+import { House, Terminal, ArrowRight } from "lucide-react";
 
 const POSTS_PER_PAGE = 8;
 
@@ -43,44 +43,53 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   const paginatedPosts = posts.slice(startIndex, startIndex + POSTS_PER_PAGE);
 
   return (
-    <div className="min-h-screen bg-background font-sans selection:bg-primary/20">
-      <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="max-w-6xl mx-auto flex h-16 items-center justify-between px-6 md:px-12 lg:px-20">
-          <Button variant="outline" asChild>
-            <Link href="/">
-              <House className="mr-2 h-4 w-4" />
-              HOME
+    <div className="min-h-screen bg-background text-foreground font-sans selection:bg-emerald-500/20 selection:text-emerald-500">
+      {/* Top Header */}
+      <header className="sticky top-0 z-50 border-b border-border/80 bg-background/85 backdrop-blur-md font-mono-code text-xs">
+        <div className="max-w-6xl mx-auto flex h-14 items-center justify-between px-6 md:px-12 lg:px-20">
+          <Button variant="ghost" size="sm" asChild className="-ml-2 hover:bg-transparent text-muted-foreground hover:text-foreground">
+            <Link href="/" className="flex items-center gap-2">
+              <House className="h-4 w-4 text-emerald-500" />
+              <span className="font-semibold tracking-wide">HOME</span>
             </Link>
           </Button>
           <div className="flex items-center gap-4">
-            <p className="text-sm tracking-wider text-muted-foreground">MODE</p>
+            <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 text-[11px] font-bold">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              LOG_FEED: LIVE
+            </span>
             <ThemeToggle />
           </div>
         </div>
       </header>
 
-      <section className="py-20">
-        <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-20">
-          <p className="mb-4 text-sm tracking-widest text-muted-foreground">
-            // THOUGHTS_AND_EXPERIMENTS
-          </p>
-          <h1 className="mb-6 text-4xl font-bold tracking-tight md:text-5xl">
-            THE TERMINAL
+      {/* Hero Section */}
+      <section className="py-16 bg-tech-grid">
+        <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-20 space-y-4">
+          <Badge
+            variant="outline"
+            className="rounded-none py-1 px-3 border-emerald-500/30 text-emerald-600 dark:text-emerald-400 bg-emerald-500/5 tracking-widest text-[10px] font-mono-code uppercase font-bold"
+          >
+            // ARCHITECTURE_NOTES & TERMINAL
+          </Badge>
+          <h1 className="text-4xl md:text-5xl font-black tracking-tight text-foreground font-mono-code">
+            THE TERMINAL.
           </h1>
-          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-            <p className="max-w-2xl text-base text-muted-foreground">
-              Notes, tutorials, and thoughts on software engineering, systems
-              programming, and the craft of building things.
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between font-mono-code text-xs text-muted-foreground">
+            <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground font-sans">
+              Notes, distributed patterns, and thoughts on software engineering, systems
+              programming, and the craft of reliable architectures.
             </p>
-            <p className="text-sm text-muted-foreground">
+            <p className="shrink-0">
               Showing {startIndex + 1}-{startIndex + paginatedPosts.length} of{" "}
-              {posts.length} posts
+              {posts.length} entries
             </p>
           </div>
         </div>
       </section>
 
-      <section className="pb-20">
+      {/* Posts Section */}
+      <section className="pb-20 pt-4">
         <div className="max-w-6xl mx-auto space-y-10 px-6 md:px-12 lg:px-20">
           <div className="grid gap-6 md:grid-cols-2">
             {paginatedPosts.map((post) => (
@@ -89,38 +98,41 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                 href={`/blog/${post.slug}`}
                 className="group"
               >
-                <Card className="h-full transition-shadow hover:shadow-lg">
-                  <CardHeader className="space-y-4">
-                    <div className="flex flex-wrap gap-2">
+                <Card className="h-full border-border/80 bg-card hover:border-emerald-500/50 transition-all hover:shadow-xl corner-hud flex flex-col">
+                  <CardHeader className="space-y-3 pb-3">
+                    <div className="flex flex-wrap gap-1.5 font-mono-code">
                       {post.tags.map((tag) => (
-                        <Badge key={tag} variant="outline">
+                        <span
+                          key={tag}
+                          className="text-[10px] px-2 py-0.5 rounded bg-muted text-muted-foreground border border-border/70"
+                        >
                           {tag}
-                        </Badge>
+                        </span>
                       ))}
                     </div>
-                    <h2 className="text-xl font-semibold leading-tight transition-colors group-hover:text-primary">
+                    <h2 className="text-xl font-bold leading-tight text-foreground group-hover:text-emerald-500 transition-colors">
                       {post.title}
                     </h2>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="flex-1 pb-4">
                     <p className="line-clamp-3 text-sm leading-relaxed text-muted-foreground">
                       {post.excerpt}
                     </p>
                   </CardContent>
-                  <CardFooter className="flex flex-col gap-4">
-                    <Separator />
-                    <div className="flex w-full flex-wrap items-center justify-between gap-3 text-xs text-muted-foreground">
+                  <CardFooter className="flex flex-col gap-3 pt-0">
+                    <Separator className="bg-border/60" />
+                    <div className="flex w-full flex-wrap items-center justify-between gap-3 text-xs font-mono-code text-muted-foreground">
                       <div className="flex gap-4">
-                        <span className="flex items-center gap-1">
-                          <FaClock className="h-3 w-3" />
+                        <span className="flex items-center gap-1.5">
+                          <FaClock className="h-3 w-3 text-emerald-500" />
                           {post.readTime}
                         </span>
-                        <span className="flex items-center gap-1">
+                        <span className="flex items-center gap-1.5">
                           <FaEye className="h-3 w-3" />
                           {post.views.toLocaleString()}
                         </span>
                       </div>
-                      <span>{formatBlogDate(post.date)}</span>
+                      <span className="text-foreground/80">{formatBlogDate(post.date)}</span>
                     </div>
                   </CardFooter>
                 </Card>
@@ -128,13 +140,14 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
             ))}
           </div>
 
-          <div className="flex flex-col gap-4 border-t pt-6 md:flex-row md:items-center md:justify-between">
-            <p className="text-sm text-muted-foreground">
-              Page {currentPage} of {totalPages}
+          {/* Pagination */}
+          <div className="flex flex-col gap-4 border-t border-border/80 pt-6 md:flex-row md:items-center md:justify-between font-mono-code text-xs">
+            <p className="text-muted-foreground">
+              PAGE {currentPage} OF {totalPages}
             </p>
             <div className="flex gap-3">
               {currentPage > 1 ? (
-                <Button variant="outline" asChild>
+                <Button variant="outline" size="sm" asChild>
                   <Link
                     href={
                       currentPage - 1 === 1
@@ -142,28 +155,28 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                         : `/blog?page=${currentPage - 1}`
                     }
                   >
-                    <FaChevronLeft className="mr-2 h-3.5 w-3.5" />
-                    Previous
+                    <FaChevronLeft className="mr-1.5 h-3 w-3" />
+                    PREVIOUS
                   </Link>
                 </Button>
               ) : (
-                <Button variant="outline" disabled>
-                  <FaChevronLeft className="mr-2 h-3.5 w-3.5" />
-                  Previous
+                <Button variant="outline" size="sm" disabled>
+                  <FaChevronLeft className="mr-1.5 h-3 w-3" />
+                  PREVIOUS
                 </Button>
               )}
 
               {currentPage < totalPages ? (
-                <Button variant="outline" asChild>
+                <Button variant="outline" size="sm" asChild>
                   <Link href={`/blog?page=${currentPage + 1}`}>
-                    Next
-                    <FaChevronRight className="ml-2 h-3.5 w-3.5" />
+                    NEXT
+                    <FaChevronRight className="ml-1.5 h-3 w-3" />
                   </Link>
                 </Button>
               ) : (
-                <Button variant="outline" disabled>
-                  Next
-                  <FaChevronRight className="ml-2 h-3.5 w-3.5" />
+                <Button variant="outline" size="sm" disabled>
+                  NEXT
+                  <FaChevronRight className="ml-1.5 h-3 w-3" />
                 </Button>
               )}
             </div>
@@ -171,12 +184,13 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
         </div>
       </section>
 
-      <footer className="border-t py-12">
-        <div className="max-w-4xl mx-auto space-y-4 px-6 text-center">
-          <Separator className="mb-6" />
-          <p className="text-sm text-muted-foreground">
-            &lt; DHIMAS.ARISTA /&gt; © 2024 — THE TERMINAL
+      {/* Footer */}
+      <footer className="border-t border-border/80 py-12 bg-background/80 font-mono-code text-xs text-center">
+        <div className="max-w-4xl mx-auto space-y-2 text-muted-foreground">
+          <p className="text-foreground font-semibold">
+            &lt; DHIMASARISTA /&gt; © 2045 BATAM, RIAU ISLANDS
           </p>
+          <p>ENGINEERING LOGS & DISTRIBUTED SYSTEMS ARCHITECTURE</p>
         </div>
       </footer>
     </div>

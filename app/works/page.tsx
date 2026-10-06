@@ -7,31 +7,29 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ThemeToggle } from "@/components/theme-toggle";
 import {
-  FaArrowLeft,
   FaGithub,
   FaExternalLinkAlt,
   FaLayerGroup,
   FaCode,
   FaPenNib,
   FaPalette,
-  FaCamera,
   FaMobile,
 } from "react-icons/fa";
 import { CgBrowser } from "react-icons/cg";
-import { House } from "lucide-react";
+import { Terminal, House, ArrowLeft, Cpu } from "lucide-react";
 
-// 1. Data Projects (Lorem Content + Professional Tags + Image Links)
+// 1. Data Projects (Retained all original projects and metadata)
 const allProjects = [
   {
     id: 1,
     title: "MSONE",
     description: "Simple landing page with modern standard UI.",
-    category: "Design", // Profesional
-    tags: ["React", "Shadcn/UI", "AstroJS"], // Profesional
+    category: "Design",
+    tags: ["React", "Shadcn/UI", "AstroJS"],
     year: "2025",
     links: { main: "https://msone.id", sec: null },
     featured: true,
-    image: "./assets/image.png",
+    image: "/assets/image.png",
   },
   {
     id: 4,
@@ -42,9 +40,8 @@ const allProjects = [
     year: "2025",
     links: { main: "https://pdiperjuangankotabatam.com/", sec: null },
     featured: false,
-    image: "./assets/pdip.png",
+    image: "/assets/pdip.png",
   },
-
   {
     id: 7,
     title: "Nao Natic UI",
@@ -54,7 +51,7 @@ const allProjects = [
     year: "2026",
     links: { main: "https://natic.archmage.me", sec: null },
     featured: true,
-    image: "./assets/natic.png",
+    image: "/assets/natic.png",
   },
   {
     id: 12,
@@ -65,7 +62,7 @@ const allProjects = [
     year: "2026",
     links: { main: "https://kcl.msone.id", sec: null },
     featured: false,
-    image: "./assets/kcl.png",
+    image: "/assets/kcl.png",
   },
   {
     id: 11,
@@ -76,7 +73,7 @@ const allProjects = [
     year: "2026",
     links: { main: "#", sec: null },
     featured: false,
-    image: "./assets/kings.png",
+    image: "/assets/kings.png",
   },
   {
     id: 10,
@@ -87,10 +84,10 @@ const allProjects = [
     year: "2026",
     links: { main: "https://pdiperjuangankotabatam.com/", sec: null },
     featured: false,
-    image: "./assets/orkaine.png",
+    image: "/assets/orkaine.png",
   },
   {
-    id: 12,
+    id: 121,
     title: "Catopuma UI",
     description: "UI Template and Reference for Dashboard and Landing Page.",
     category: "Design",
@@ -98,7 +95,7 @@ const allProjects = [
     year: "2026",
     links: { main: "https://pdiperjuangankotabatam.com/", sec: null },
     featured: false,
-    image: "./assets/catopuma.png",
+    image: "/assets/catopuma.png",
   },
   {
     id: 3,
@@ -115,50 +112,22 @@ const allProjects = [
   },
 ];
 
-// 2. Helper untuk warna tags (Profesional Look)
 const getTagColor = (tag: string) => {
   const mapping: Record<string, string> = {
-    // Languages
-    "C#": "text-pink-600 bg-pink-100 dark:bg-pink-900/40 dark:text-pink-400 border-pink-200",
-    Rust: "text-orange-600 bg-orange-100/50 dark:bg-orange-900/30 border-orange-200",
-    React: "text-blue-400 bg-blue-100/50 dark:bg-blue-900/30 border-blue-200",
-    "React Native":
-      "text-blue-500 bg-blue-200 dark:bg-blue-900/30 border-blue-200",
-    Java: "text-red-800 bg-red-100/50 dark:bg-red-900/30 border-red-200",
-    NodeJS:
-      "text-green-600 bg-green-100/50 dark:bg-green-900/30 border-green-200",
-    NestJS: "text-red-600 bg-red-100/50 dark:bg-red-900/30 border-red-200",
-    TypeScript:
-      "text-blue-600 bg-blue-100/50 dark:bg-blue-900/30 border-blue-200",
-    PostgreSQL:
-      "text-blue-400 bg-blue-100/50 dark:bg-blue-900/30 border-blue-200",
-    // Frameworks
-    NextJS:
-      "text-neutral-100 bg-neutral-600 dark:bg-neutral-800/60 border-neutral-300",
-    "Spring Boot":
-      "text-emerald-600 bg-emerald-100/50 dark:bg-emerald-900/30 border-emerald-200",
-    "Shadcn/UI":
-      "text-purple-600 bg-purple-100/50 dark:bg-purple-900/30 border-purple-200",
-    Svelte:
-      "text-orange-600 bg-orange-100/50 dark:bg-orange-900/30 border-orange-200",
-    // Blockchain
-    Blockchain:
-      "text-yellow-700 bg-yellow-100/50 dark:bg-yellow-900/30 border-yellow-200",
-    "Hyperledger Besu":
-      "text-amber-700 bg-amber-100/50 dark:bg-amber-900/30 border-amber-200",
-
-    // Research
-    "Systems Thinking":
-      "text-indigo-600 bg-indigo-100/50 dark:bg-indigo-900/30 border-indigo-200",
-    "Urban Planning":
-      "text-sky-600 bg-sky-100/50 dark:bg-sky-900/30 border-sky-200",
-    Android: "text-teal-600 bg-teal-100/50 dark:bg-teal-900/30 border-teal-200",
+    "C#": "text-pink-600 bg-pink-100 dark:bg-pink-950/60 dark:text-pink-400 border-pink-200 dark:border-pink-800",
+    Rust: "text-orange-600 bg-orange-100/50 dark:bg-orange-950/60 border-orange-200 dark:border-orange-800",
+    React: "text-cyan-600 bg-cyan-100/50 dark:bg-cyan-950/60 border-cyan-200 dark:border-cyan-800",
+    Java: "text-red-700 bg-red-100/50 dark:bg-red-950/60 border-red-200 dark:border-red-800",
+    NextJS: "text-foreground bg-muted border-border",
+    PostgreSQL: "text-blue-600 bg-blue-100/50 dark:bg-blue-950/60 border-blue-200 dark:border-blue-800",
+    "Spring Boot": "text-emerald-600 bg-emerald-100/50 dark:bg-emerald-950/60 border-emerald-200 dark:border-emerald-800",
+    "Shadcn/UI": "text-purple-600 bg-purple-100/50 dark:bg-purple-950/60 border-purple-200 dark:border-purple-800",
+    "Hyperledger Besu": "text-amber-700 bg-amber-100/50 dark:bg-amber-950/60 border-amber-200 dark:border-amber-800",
   };
 
   return mapping[tag] ?? "text-muted-foreground bg-muted/40 border-border";
 };
 
-// 3. Helper Icons
 const getCategoryIcon = (category: string) => {
   switch (category) {
     case "General":
@@ -186,162 +155,75 @@ export default function GeneralWorks() {
 
   if (!mounted) return null;
 
-  // Filter Logic
-  const categories = ["All", "General", "Application", "Design", "Writing"];
+  const categories = ["All", "General", "Application", "Design"];
   const filteredProjects =
     activeTab === "All"
       ? allProjects
       : allProjects.filter((p) => p.category === activeTab);
 
-  const featuredProjects = allProjects.filter((p) => p.featured);
-
   return (
-    <div className="min-h-screen bg-background font-sans selection:bg-primary/20">
-      {/* --- HEADER --- */}
-      <header className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 h-16 flex items-center justify-between">
+    <div className="min-h-screen bg-background text-foreground font-sans selection:bg-emerald-500/20 selection:text-emerald-500">
+      {/* Top Industrial Header */}
+      <header className="sticky top-0 z-50 border-b border-border/80 bg-background/85 backdrop-blur-md font-mono-code text-xs">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 h-14 flex items-center justify-between">
           <Button
             variant="ghost"
-            className="pl-0 hover:bg-transparent -ml-2"
+            size="sm"
+            className="hover:bg-transparent -ml-2 text-muted-foreground hover:text-foreground"
             asChild
           >
-            <Link
-              href="/"
-              className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <House className="h-4 w-4" />
-              <span className="font-medium tracking-wide">HOME</span>
+            <Link href="/" className="flex items-center gap-2">
+              <House className="h-4 w-4 text-emerald-500" />
+              <span className="font-semibold tracking-wide">HOME</span>
             </Link>
           </Button>
+
           <div className="flex items-center gap-4">
-            {/* <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded bg-green-500/10 text-green-600 dark:text-green-400 text-[10px] font-bold tracking-wider border border-green-500/20">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded bg-green-400 opacity-75"></span>
-                <span className="relative inline-flex rounded h-2 w-2 bg-green-500"></span>
-              </span>
-              LET’S COLLABORATE ON MEANINGFUL WORKS
-            </span> */}
+            <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 text-[11px] font-bold">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              SYSTEM_ARCHIVES // ACTIVE
+            </span>
             <ThemeToggle />
           </div>
         </div>
       </header>
 
-      {/* --- HERO SECTION --- */}
-      <section className="pt-20 pb-12 relative">
+      {/* Hero Section */}
+      <section className="pt-16 pb-10 relative overflow-hidden bg-tech-grid">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="max-w-3xl space-y-6">
+          <div className="max-w-3xl space-y-4">
             <Badge
               variant="outline"
-              className="rounded-none py-1.5 px-3 border-primary/20 text-primary bg-primary/5 tracking-widest text-[10px] font-mono uppercase"
+              className="rounded-none py-1 px-3 border-emerald-500/30 text-emerald-600 dark:text-emerald-400 bg-emerald-500/5 tracking-widest text-[10px] font-mono-code uppercase font-bold"
             >
-              // WORKS
+              // SYSTEM_REGISTRY & PORTFOLIO
             </Badge>
 
             <h1 className="text-4xl md:text-6xl font-black tracking-tight text-foreground leading-[1.1]">
-              Selected <span className="text-red-600">Works</span>.{" "}
-              <br className="hidden md:block" />
+              Selected <span className="text-emerald-500">Works</span>.
             </h1>
 
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse.
+            <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+              Curated web architectures, backend orchestration systems, and interactive software products engineered with clean constraints and performance.
             </p>
           </div>
         </div>
       </section>
 
-      {/* --- FEATURED CARDS (Highlight) --- */}
-      {/* <section className="py-8">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {featuredProjects.map((project) => (
-              <Card
-                key={project.id}
-                className="group overflow-hidden border-border/60 bg-card hover:border-primary/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5 rounded-xl"
-              >
-                <div className="h-64 w-full relative overflow-hidden">
-                  <div className="absolute inset-0 bg-black/20 z-10 group-hover:bg-black/10 transition-colors" />
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover object-top transform group-hover:scale-105 transition-transform duration-700"
-                  />
-                  <div className="absolute bottom-4 left-4 right-4 z-20 flex justify-between items-end">
-                    <div className="bg-background/95 backdrop-blur-md px-3 py-1.5 rounded-md border shadow-sm">
-                      <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-foreground">
-                        {getCategoryIcon(project.category)}
-                        {project.category}
-                      </div>
-                    </div>
-                    <span className="text-white font-mono text-xs font-medium bg-black/50 px-2 py-1 rounded backdrop-blur-sm">
-                      {project.year}
-                    </span>
-                  </div>
-                </div>
-
-                <CardHeader className="pb-2 pt-6">
-                  <h3 className="text-2xl font-bold tracking-tight group-hover:text-primary transition-colors">
-                    {project.title}
-                  </h3>
-                </CardHeader>
-
-                <CardContent className="space-y-4 pb-4">
-                  <p className="text-muted-foreground leading-relaxed line-clamp-2 text-sm">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className={`text-[10px] font-medium px-2 py-1 rounded-md border ${getTagColor(tag)}`}
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </CardContent>
-
-                <CardFooter className="pt-2 pb-6">
-                  <div className="flex gap-4">
-                    {project.links.main && (
-                      <Link
-                        href={project.links.main}
-                        className="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors"
-                      >
-                        View Project <FaExternalLinkAlt className="w-3 h-3" />
-                      </Link>
-                    )}
-                    {project.links.sec && (
-                      <Link
-                        href={project.links.sec}
-                        className="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-                      >
-                        <FaGithub className="w-4 h-4" /> Source
-                      </Link>
-                    )}
-                  </div>
-                </CardFooter>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section> */}
-
-      {/* --- FILTER & LIST SECTION --- */}
-      <section className="py-12 min-h-[50vh]">
+      {/* Filter & Projects List Section */}
+      <section className="py-10 min-h-[50vh]">
         <div className="max-w-7xl mx-auto px-6 md:px-12 space-y-8">
           {/* Filter Tabs */}
-          <div className="flex flex-wrap items-center gap-2 border-b pb-4 overflow-x-auto no-scrollbar">
+          <div className="flex flex-wrap items-center gap-2 border-b border-border/80 pb-4 font-mono-code text-xs">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActiveTab(cat)}
                 className={`
-                  px-4 py-2 rounded-full text-sm font-medium transition-all duration-300
+                  px-4 py-1.5 rounded text-xs font-semibold transition-all duration-200
                   ${
                     activeTab === cat
-                      ? "bg-foreground text-background shadow-lg scale-105"
+                      ? "bg-foreground text-background shadow-md scale-105"
                       : "bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground"
                   }
                 `}
@@ -360,73 +242,66 @@ export default function GeneralWorks() {
               {filteredProjects.map((project) => (
                 <motion.div
                   layout
-                  initial={{ opacity: 0, scale: 0.9 }}
+                  initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.2 }}
                   key={project.id}
                 >
-                  <div className="h-full border rounded-xl bg-background hover:border-primary/40 transition-all hover:shadow-lg flex flex-col group overflow-hidden">
-                    {/* Image Thumbnail for Grid Items */}
-                    <div className="h-40 w-full relative overflow-hidden bg-muted">
+                  <div className="h-full border border-border/80 rounded-xl bg-card hover:border-emerald-500/50 transition-all hover:shadow-xl flex flex-col group overflow-hidden corner-hud">
+                    {/* Image Thumbnail */}
+                    <div className="h-44 w-full relative overflow-hidden bg-muted">
                       <img
                         src={project.image}
                         alt={project.title}
                         className="w-full h-full object-cover object-top transform group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
                       />
                       <div className="absolute top-3 right-3">
-                        <span className="text-[10px] font-bold bg-background/80 backdrop-blur px-2 py-1 rounded border shadow-sm flex items-center gap-1">
+                        <span className="text-[10px] font-bold font-mono-code bg-background/90 backdrop-blur px-2 py-0.5 rounded border border-border/70 shadow-sm flex items-center gap-1.5">
                           {getCategoryIcon(project.category)} {project.category}
                         </span>
                       </div>
                     </div>
 
-                    <div className="p-6 flex flex-col flex-grow">
-                      {/* Top Meta */}
-                      <div className="flex justify-between items-start mb-3">
-                        <span className="text-xs text-muted-foreground font-mono">
-                          {project.year}
-                        </span>
+                    <div className="p-6 flex flex-col flex-grow space-y-4">
+                      {/* Meta */}
+                      <div className="flex justify-between items-start font-mono-code text-xs text-muted-foreground">
+                        <span className="text-emerald-500 font-semibold">// {project.year}</span>
                       </div>
 
                       {/* Content */}
-                      <div className="mb-6">
-                        <h4 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors line-clamp-1">
+                      <div className="space-y-2 flex-grow">
+                        <h3 className="font-bold text-lg text-foreground group-hover:text-emerald-500 transition-colors line-clamp-1">
                           {project.title}
-                        </h4>
-                        <p className="text-sm text-muted-foreground line-clamp-3">
+                        </h3>
+                        <p className="text-sm text-muted-foreground line-clamp-3 leading-relaxed">
                           {project.description}
                         </p>
                       </div>
 
-                      {/* Footer / Tags */}
-                      <div className="mt-auto pt-4 border-t border-dashed border-border/60 flex flex-col gap-4">
+                      {/* Tags & Action Link */}
+                      <div className="pt-4 border-t border-border/60 flex flex-col gap-3 font-mono-code text-xs">
                         <div className="flex flex-wrap gap-1.5">
-                          {project.tags.slice(0, 3).map((tag) => (
+                          {project.tags.map((tag) => (
                             <span
                               key={tag}
-                              className={`text-[10px] font-medium px-2 py-1 rounded-md border ${getTagColor(tag)}`}
+                              className={`text-[10px] font-medium px-2 py-0.5 rounded border ${getTagColor(tag)}`}
                             >
                               {tag}
                             </span>
                           ))}
-                          {project.tags.length > 3 && (
-                            <span className="text-[10px] px-1.5 py-0.5 text-muted-foreground">
-                              +more
-                            </span>
-                          )}
                         </div>
 
-                        <div className="flex items-center justify-end opacity-60 group-hover:opacity-100 transition-opacity">
-                          <Link
-                            href={
-                              project.links.main || project.links.sec || "#"
-                            }
-                            className="text-xs flex items-center gap-1 hover:underline hover:text-primary font-medium"
+                        <div className="flex items-center justify-end pt-1">
+                          <a
+                            href={project.links.main || project.links.sec || "#"}
+                            target={project.links.main !== "#" ? "_blank" : undefined}
+                            rel="noopener noreferrer"
+                            className="text-xs flex items-center gap-1.5 hover:text-emerald-500 font-semibold transition-colors"
                           >
-                            View Details{" "}
-                            <FaExternalLinkAlt className="w-2 h-2" />
-                          </Link>
+                            <span>EXPLORE ARCHIVE</span>
+                            <FaExternalLinkAlt className="w-2.5 h-2.5" />
+                          </a>
                         </div>
                       </div>
                     </div>
@@ -437,19 +312,20 @@ export default function GeneralWorks() {
           </motion.div>
 
           {filteredProjects.length === 0 && (
-            <div className="py-20 text-center text-muted-foreground">
-              <p>No projects found in this category.</p>
+            <div className="py-20 text-center text-muted-foreground font-mono-code">
+              <p>-- No projects found matching category --</p>
             </div>
           )}
         </div>
       </section>
 
-      {/* --- FOOTER --- */}
-      <footer className="border-t py-12 bg-muted/10">
-        <div className="max-w-7xl mx-auto px-6 text-center space-y-4">
-          <p className="text-sm text-muted-foreground font-mono">
-            © {new Date().getFullYear()} Dhimas Arista. All rights reserved.
+      {/* Footer */}
+      <footer className="border-t border-border/80 py-12 bg-background/80 font-mono-code text-xs text-center">
+        <div className="max-w-7xl mx-auto px-6 space-y-2 text-muted-foreground">
+          <p className="text-foreground font-semibold">
+            &lt; DHIMASARISTA /&gt; © 2045 BATAM, RIAU ISLANDS
           </p>
+          <p>ENGINEERED FOR SCALE, DETERMINISM & RESILIENCE</p>
         </div>
       </footer>
     </div>
