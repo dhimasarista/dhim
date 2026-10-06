@@ -175,7 +175,7 @@ export default function Home() {
           aria-label="Top view of Tokyo cargo port"
         >
           <source
-            src="/assets/mixkit-top-view-of-tokyo-cargo-port-4445-hd-ready.mp4"
+            src="/assets/mixkit-close-up-of-server-racks-lights-23215-hd-ready.mp4"
             type="video/mp4"
           />
         </video>
@@ -301,24 +301,22 @@ export default function Home() {
               <nav className="nx-nav">
                 {/* Column 1: Experience */}
                 <div className="nx-col nx-c1">
-                  <h3>EXPERIENCE</h3>
+                  <h3>WORKS</h3>
                   <ul>
                     <li>
                       <a href="https://epbox-engg.com" target="_blank" rel="noopener noreferrer">
-                        EPBOX Engineering — IIoT Systems
+                        EPBOX ENGINEERING PTE LTD
                       </a>
                     </li>
+                    
                     <li>
-                      <a href="https://msone.id" target="_blank" rel="noopener noreferrer">
-                        MSONE — Fullstack Solutions
+                      <a href="https://bappilu.pdiperjuangankotabatam.com" target="_blank" rel="noopener noreferrer">
+                        BAPPILU DPC PDIP KOTA BATAM
                       </a>
                     </li>
-                    <li>
-                      <a href="#">Orkaine — Payment Platform Engine</a>
-                    </li>
-                    <li>
+                    {/* <li>
                       <Link href="/works">Selected Works Archive (/works)</Link>
-                    </li>
+                    </li> */}
                   </ul>
                 </div>
 
@@ -327,7 +325,7 @@ export default function Home() {
                   <h3>CAPABILITIES</h3>
                   <ul>
                     <li>
-                      <a href="#">Skill Programming</a>
+                      <a href="#">Programming</a>
                     </li>
                     <li>
                       <a href="#">Software Architecture</a>
@@ -336,26 +334,20 @@ export default function Home() {
                       <a href="#">Industrial IoT</a>
                     </li>
                     <li>
-                      <a href="#">Infrastructure &amp; DevOps</a>
+                      <a href="#">Infra &amp; DevOps</a>
                     </li>
                   </ul>
                 </div>
 
                 {/* Column 3: Resources */}
                 <div className="nx-col nx-c3">
-                  <h3>RESOURCES</h3>
+                  <h3>INTERESTS</h3>
                   <ul>
                     <li>
                       <a href="#">Socials</a>
                     </li>
                     <li>
                       <a href="#">Planology</a>
-                    </li>
-                    <li>
-                      <a href="#">Robotics</a>
-                    </li>
-                    <li>
-                      <Link href="/blog">Engineering Logs (/blog)</Link>
                     </li>
                   </ul>
                 </div>

@@ -17,7 +17,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Dhimas Arista — Build your future now",
+  title: "Dhimas Arista",
   description:
     "Software & Industrial IoT Engineer specializing in distributed architecture, real-time telemetry systems, and resilient fullstack software.",
   icons: {
