@@ -21,11 +21,15 @@ export const metadata: Metadata = {
   description:
     "Software & Industrial IoT Engineer specializing in distributed architecture, real-time telemetry systems, and resilient fullstack software.",
   icons: {
-    icon: "/favicon.png",
-    shortcut: "/favicon.png",
-    apple: "/favicon.png",
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/icon" },
+    ],
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
   },
 };
+
 
 export default function RootLayout({
   children,
@@ -39,12 +43,14 @@ export default function RootLayout({
       className={`${instrumentSerif.variable} ${plusJakartaSans.variable}`}
     >
       <head>
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <script
           dangerouslySetInnerHTML={{
             __html: `if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('js-enter');}`,
           }}
         />
       </head>
+
       <body className="antialiased">
         <ThemeProvider
           attribute="class"

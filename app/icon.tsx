@@ -19,12 +19,13 @@ export default function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#000",
+          borderRadius: "50%",
+          background: "#20232a",
         }}
       >
         <svg
-          width="24"
-          height="24"
+          width="26"
+          height="26"
           viewBox="-11.5 -10.23174 23 20.46348"
           xmlns="http://www.w3.org/2000/svg"
         >
